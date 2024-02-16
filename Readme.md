@@ -14,5 +14,6 @@ git commit -m "message for your changes"
 go to gitlab account-repository create new empty repo if we dont hv repo, copy http url code
 git remote add origin {http nurl code}
 git push origin {branch name}
+An npm script is a convenient way to bundle common shell commands like a set of built-in and custom scripts for your project. They are typically terminal commands or a string of terminal commands that help automate repetitive tasks. 
 
 
