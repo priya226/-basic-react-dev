@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    border:1px solid black;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+.logo-container{
+    .logo{
+        height: 60px;
+        width: 80px;
+    }
+}
+.nav-items >ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: end;
+}
+.nav-items >ul >li{
+    padding: 10px;
+    margin: 10px;
+}
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.res-card{
+    background-color: #f0f0f0;
+    margin: 15px;
+    height: 300px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.res-card :hover{
+    border: 1px solid red;
+    cursor: pointer;
+}
+.search{
+    padding: 10px;
+}
+.res-logo{
+    width: 100%;
+}
