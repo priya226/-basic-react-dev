@@ -38,17 +38,35 @@ import ReactDOM  from 'react-dom/client';
   styleCard = {
     backgroundColor : "#f0f0f0"
   }
-  const RestaurantCard =() =>{
+  const RestaurantCard =(props) =>{
+    console.log(props);
+    console.log('Props are arguments passed into React components')
+    console.log('React Props are like function arguments in JavaScript and attributes in HTML')
+    console.log('To send props into a component, use the same syntax as HTML attributes')
     return (
         <div className='res-card' >
             <img 
             className='res-logo'
             alt='taza-kitchen-food'
             src='https://b.zmtcdn.com/data/reviews_photos/98a/ad03feac25bb8966d35ad10b2c51098a_1570340390.jpg?output-format=webp&fit=around|771.75:416.25&crop=771.75:416.25;*,*'/>
-            <h3> Taza Kitchen</h3>
-            <h4> Biryani,South indian,north indian</h4>
-            <h4>4.4 star</h4>
-            <h4>30 minuites</h4>
+            <h3> {props.resName}</h3>
+            <h4> {props.cuisine}</h4>
+            <h4>{props.rating}</h4>
+            <h4>{props.deliveryTime}</h4>
+        </div>
+    )
+  }
+  const RestaurantCardDEstructPropOnFly =({resName,cuisine,rating,deliveryTime}) =>{
+    return (
+        <div className='res-card' >
+            <img 
+            className='res-logo'
+            alt='taza-kitchen-food'
+            src='https://b.zmtcdn.com/data/reviews_photos/98a/ad03feac25bb8966d35ad10b2c51098a_1570340390.jpg?output-format=webp&fit=around|771.75:416.25&crop=771.75:416.25;*,*'/>
+            <h3> {resName}</h3>
+            <h4> {cuisine}</h4>
+            <h4>{rating}</h4>
+            <h4>{deliveryTime}</h4>
         </div>
     )
   }
@@ -57,9 +75,24 @@ import ReactDOM  from 'react-dom/client';
     <div className='body'>
         <div className='Search'>Search</div>
         <div className='res-container'>
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
+            <RestaurantCardDEstructPropOnFly 
+            resName="Taza Kitchen"
+            cuisine ="Biryani, North Indian, Asian"
+            rating="4.4 star"
+            deliveryTime="30 minutes"
+            />
+            <RestaurantCard 
+            resName ="Mehfil"
+            cuisine="Biryani, North Indian, Non-Veg, Veg"
+            rating="4.4 star"
+            deliveryTime="30 minutes"
+            />
+            <RestaurantCard 
+            resName ="Santosh Family Dhaba"
+            cuisine ="Veg, South Indian, North Indian"
+            rating="4.4 star"
+            deliveryTime="30 minutes"
+            />
         </div>
     </div>
     )
