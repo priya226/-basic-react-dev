@@ -17,3 +17,11 @@ git push origin {branch name}
 An npm script is a convenient way to bundle common shell commands like a set of built-in and custom scripts for your project. They are typically terminal commands or a string of terminal commands that help automate repetitive tasks. 
 
 
+2 Types of Export/Import
+-Default Export/Import
+ export default Component;
+ import Component from "path"
+
+ -Named Export/Import
+  export const Component/data
+  import {Component/data} from "path"
