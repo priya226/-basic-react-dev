@@ -1,4 +1,4 @@
-const RestaurantCard =(({name,cuisines,cloudinaryImageId,lastMileTravelString})=>
+const RestaurantCard =(({name,cuisines,cloudinaryImageId,lastMileTravelString,avgRating})=>
     {
         return (
             <div className='res-card'>
@@ -13,6 +13,7 @@ const RestaurantCard =(({name,cuisines,cloudinaryImageId,lastMileTravelString})=
                  <h3> {name}</h3>
                 <h4> {cuisines.join(", ")}</h4>
                 <h4>{lastMileTravelString}</h4>
+                <h4>{avgRating}</h4>
            
             </div>
         )

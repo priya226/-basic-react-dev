@@ -37,8 +37,9 @@
     border: 1px solid red;
     cursor: pointer;
 }
-.search{
+.Search{
     padding: 10px;
+    display: none;
 }
 .res-logo{
     width: 100%;
