@@ -25,3 +25,7 @@ An npm script is a convenient way to bundle common shell commands like a set o
  -Named Export/Import
   export const Component/data
   import {Component/data} from "path"
+
+  #Normal JS Utility Hoks
+  UseState
+  UseEffect

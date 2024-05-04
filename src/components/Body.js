@@ -1,6 +1,6 @@
 import RestaurantCard from "./REstarauntCard";
 import {restaurantsList} from "../utils/mocData" //named export import like this
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Body= () =>{
     // https://dev.to/shiv1998/why-not-to-use-index-as-key-in-react-lists-practical-example-3e66
    //Local State Variable - Super poerful variable
@@ -12,8 +12,20 @@ const Body= () =>{
     // const arr =  useState(restaurantsList) 
     // const restaurantsListData = arr[0]
     // const setListOfRestaraunt = arr[1]
+    //wehener the state variable updates of rerender the element
+   useEffect(()=>{
+    console.log('useEffect cslled');
+   },[]);
 
-
+  //  const fetchData = async () =>{
+  //   const data = await fetch(
+  //       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+  //   );
+  //   const json = await data.json();
+  //   console.log(json)
+  //  };
+  //  fetchData();
+   console.log('body render')
     return (
     <div className='body'>
         <div className='Search'>Search</div>
