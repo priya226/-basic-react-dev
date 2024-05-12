@@ -1,7 +1,7 @@
  export const restaurantsList = [
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "F",
         id: "73011",
         name: "KFC",
@@ -126,7 +126,7 @@
     },
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "Mehfil",
         id: "542132",
         name: "Mehfil",
@@ -246,7 +246,7 @@
     },
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "F",
         id: "321517",
         name: "Taza kitchen",
@@ -366,7 +366,7 @@
     },
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "F",
         id: "311806",
         name: "Burger King",
@@ -491,7 +491,7 @@
     },
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "F",
         id: "132460",
         name: "Annapurna Andhra Mess",
@@ -611,7 +611,7 @@
     },
     {
       type: "restaurant",
-      data: {
+      info: {
         type: "F",
         id: "496677",
         name: "Uncle Ji Restaurant",
