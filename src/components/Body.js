@@ -58,13 +58,14 @@ const Body= () =>{
     }
    };
 
-   if(restaurantsListData.length===0){
-    console.log('shimmer called')
-    return <Shimmer/>
-   }
+  //  if(restaurantsListData.length===0){
+  //   console.log('shimmer called')
+  //   return <Shimmer/>
+  //  }
 
    console.log('body render')
-    return (
+   console.log('conditional rendeing')
+    return restaurantsListData.length===0 ? <Shimmer/>: (
     <div className='body'>
         <div className='Search'>Search</div>
         <button className='flt-btn' onClick={
