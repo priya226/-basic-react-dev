@@ -24,39 +24,58 @@ const Body= () =>{
    fetchData();
    },[]);
 
-  //  function showPosition(position){
-  //   long = position.coords.longitude;
-  //   lat = position.coords.latitude;
-  //   // getRestData(lat,long)
-  // }
+  let getLocationPromise = new Promise((resolve, reject) => {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            resolve({lat: position.coords.latitude, long: position.coords.longitude});
+        });
 
+    } else {
+        reject("your browser doesn't support geolocation API");
+    }
+  });
 
-   async function fetchData(){
-    let long =78.45636000;
-    let lat = 17.38405000;
-    // if(navigator.geolocation){
-    //   navigator.geolocation.getCurrentPosition(showPosition);
-    // }
+  async function getData(lat, long){
 
     try{
-      const data = await fetch(
+        const data = await fetch(
         `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}&page_type=DESKTOP_WEB_LISTING`
-    );
-    const json =await  data.json();
-    console.log(json)
-    for(let i=0;i<json?.data?.cards?.length;i++){
-      let checkDataPresent = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants; 
-      if(checkDataPresent){
-        setListOfRestaraunt(checkDataPresent)
-        console.log(checkDataPresent)
-        break;
+      );
+      const json = await data.json();
+      console.log(json)
+      for(let i=0;i<json?.data?.cards?.length;i++){
+        let checkDataPresent = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants; 
+        if(checkDataPresent){
+          setListOfRestaraunt(checkDataPresent)
+          console.log(checkDataPresent)
+          break;
+        }
       }
-    }
     }
     catch(error){
       console.error('fetched error',error)
     }
-   };
+  };
+  
+
+   function fetchData(){
+      // Now I can use the promise followed by .then() 
+     // to make use of the values anywhere in the program
+     let lat = '17.4358528';
+     let long = '78.3679488';
+
+    getLocationPromise.then((location) => {
+        console.log(location.latitude);
+        lat = location.lat;
+        long = location.long
+        getData(lat, long);
+    }).catch((err) => {
+        console.log(err);
+        getData(lat, long);
+    })
+    
+  }
+   
 
   //  if(restaurantsListData.length===0){
   //   console.log('shimmer called')
