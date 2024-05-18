@@ -58,3 +58,10 @@
     margin: 20px;
     color: gray;
 }
+.search-conatiner{
+    display: flex;
+}
+.actions-btn{
+    display: flex;
+    margin: 15px;
+}

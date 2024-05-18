@@ -15,8 +15,9 @@ const Body= () =>{
     // const setListOfRestaraunt = arr[1]
 
 
-    const [restaurantsListData, setListOfRestaraunt] =  useState([]) // first arg is variable and second is fn to update the variable
-
+    const [restaurantsListData, setListOfRestaraunt] =  useState([]) // first arg is variable and second is fn to update the variable restarauntListData is original dont need to update
+   const [searchText,setSearchText]=useState('')
+   const [filteredRestaurantListData,setFilterRestaurant]=useState([]) // filteredRestaurantList is used everywhere
 
     //wehener the state variable updates of rerender the element
    useEffect(()=>{
@@ -46,7 +47,8 @@ const Body= () =>{
       for(let i=0;i<json?.data?.cards?.length;i++){
         let checkDataPresent = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants; 
         if(checkDataPresent){
-          setListOfRestaraunt(checkDataPresent)
+          setListOfRestaraunt(checkDataPresent) // original array need to intact
+          setFilterRestaurant(checkDataPresent) //filter array used everywhere
           console.log(checkDataPresent)
           break;
         }
@@ -86,22 +88,50 @@ const Body= () =>{
    console.log('conditional rendeing')
     return restaurantsListData.length===0 ? <Shimmer/>: (
     <div className='body'>
-        <div className='Search'>Search</div>
-        <button className='flt-btn' onClick={
-          ()=>{
-            console.log('button clicked');
-            console.log(restaurantsListData);
-           let filteredRestaurantsListData = restaurantsListData.filter((rest)=> rest.info.avgRating > 4.5);
-           console.log(filteredRestaurantsListData);
-           setListOfRestaraunt(filteredRestaurantsListData)
-          }  
-        }>Top Rated Restaraunt </button>
-        {/* <button className="reset-btn" onClick={
+      <div className="actions-btn">
+
+      <div className='search-conatiner' >
+
+          <input
+          type="text"
+          className="search-input"
+          placeholder="Search a Restaurant you want .."
+          value={searchText}
+          onChange={(event)=>setSearchText(event.target.value)}
+          >
+          </input>
+
+        <button className="searchBtn" onClick={()=>{
+        console.log(searchText);
+        const filteredRestaurant= restaurantsListData.filter(res=> res.info.name.toLowerCase().includes(searchText));
+        console.log(filteredRestaurant)
+        setFilterRestaurant(filteredRestaurant)
+        }
         }>
-          Reset
-        </button> */}
+        Search
+        </button>
+
+        </div>
+        <button className='flt-btn' onClick={
+        ()=>{
+          console.log('button clicked');
+          console.log(restaurantsListData);
+        let filteredRestaurantsListData = restaurantsListData.filter((rest)=> rest.info.avgRating > 4);
+        console.log(filteredRestaurantsListData);
+        setFilterRestaurant(filteredRestaurantsListData)
+        }  
+        }>Top Rated Restaraunt </button>
+
+        <button className="reset-btn" onClick={()=>{
+        setFilterRestaurant(restaurantsListData)
+        }
+        }>
+        Reset
+        </button>
+      </div>
+        
         <div className='restaurant-list'>
-            {restaurantsListData.map((restaraunt)=>{
+            {filteredRestaurantListData.map((restaraunt)=>{
                 return (<RestaurantCard {...restaraunt.info} key={restaraunt.info.id} />);}
                           )}
         </div>
