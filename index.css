@@ -65,3 +65,11 @@
     display: flex;
     margin: 15px;
 }
+.footer{
+    width: auto;
+    margin: 20px;
+    background-color: aqua;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
