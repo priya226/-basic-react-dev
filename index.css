@@ -64,6 +64,8 @@
 .actions-btn{
     display: flex;
     margin: 15px;
+    background-color: blue;
+    color: white;
 }
 .footer{
     width: auto;
