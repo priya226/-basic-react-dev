@@ -68,8 +68,13 @@ async function getData(coords){
 
       //this function returns the filtered data based on search
 function filterDataonSearch(searchText,restarauntList){
-    const filterdata=restarauntList?.filter((rest)=>
-        rest?.data?.name.toLowerCase().includes(searchText.toLowerCase()));
+    const filterdata=restarauntList?.filter(res=> res.info.name.toLowerCase().includes(searchText));
+    
+    return filterdata;
+}
+
+function topRatedRestaraunt(rating,restarauntList){
+  let filterdata = restarauntList.filter((rest)=> rest.info.avgRating > rating);
     return filterdata;
 }
 
@@ -82,7 +87,7 @@ function filterDataonSearch(searchText,restarauntList){
 
     
     const Body=()=>{
-    const [restarauntListData,setListOfRestaraunt]=useState([]); // Setting previous state and store data fetched from API
+    const [allrestarauntListData,setListOfAllRestaraunt]=useState([]); // Setting previous state and store data fetched from API
     const [searchText,setSearchText]=useState(''); // search Text initial
     const [filteredRestaurantListData,setFilterRestaurant]=useState([]) // This  we use for rendening data and filtering operation
     const [loading,setLoading]=useState(false); // in order to show shimmer ui
@@ -95,8 +100,9 @@ function filterDataonSearch(searchText,restarauntList){
             const swiggyAPI = await getData(coordinatesAPI) ; // then this get called with param from 1st promise
             const checkDataPresent = {coordinatesAPI,swiggyAPI}
 
-            setListOfRestaraunt(checkDataPresent.swiggyAPI) // original array need to intact
+            setListOfAllRestaraunt(checkDataPresent.swiggyAPI) // original array need to intact
             setFilterRestaurant(checkDataPresent.swiggyAPI) //filter array used everywhere
+            console.log(restarauntListData,'restarauntListData')
         
         }catch(error){
             console.log('error')
@@ -123,13 +129,27 @@ function filterDataonSearch(searchText,restarauntList){
             <button
             className="action-btn"
             onClick={()=> ////In React, when you're attaching event handlers like onClick to elements, you often use arrow functions to maintain the context of this within the component. This ensures that the this keyword refers to the component instance itself rather than the DOM element where the event was triggered.
-                {  const data=filterDataonSearch(searchText,restarauntListData)
-                    setListOfRestaraunt(data)
+                {  const data=filterDataonSearch(searchText,allrestarauntListData)
+                  setFilterRestaurant(data)
                 }
             }
             >
               Search
             </button>
+
+            <button className='flt-btn' onClick={
+                ()=>{
+                  data = topRatedRestaraunt(4,allrestarauntListData)
+                  setFilterRestaurant(data)
+                }  
+                }>Top Rated Restaraunt </button>
+
+                <button className="reset-btn" onClick={()=>{
+                setFilterRestaurant(allrestarauntListData)
+                }
+                }>
+                Reset
+                </button>
             </div>
 
             <div className='restaurant-list'>
