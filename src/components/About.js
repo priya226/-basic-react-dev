@@ -1,6 +1,5 @@
 import { useState } from "react";
-import profileImg from "../../Assest/profile.jpeg"
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 const About = ()=>{
     const [showProfile,setshowProfile]=useState(false)
     return (
@@ -19,11 +18,9 @@ const About = ()=>{
                         >
                             Hide My Profile
                         </button>
-                    </Link>
-                    <img src={profileImg} />
-                    <p>
-                        Hi this is Penguine.He he he.
-                    </p>
+                        </Link>
+                        <Outlet /> {/*  because here the Profile component gets added which is child route for about section */}
+
                     </>
                 ):
                 (
