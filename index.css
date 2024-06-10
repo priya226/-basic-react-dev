@@ -75,3 +75,11 @@
     display: flex;
     text-align: center;
 }
+.about-profile-button{
+    background-color: red;
+    margin: 5px;
+    border-radius: 2px;
+    color: darkseagreen;
+    border-width: 5px;
+    
+}
