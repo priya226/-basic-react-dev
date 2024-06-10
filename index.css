@@ -81,5 +81,15 @@
     border-radius: 2px;
     color: darkseagreen;
     border-width: 5px;
-    
+
+}
+.form-group{
+    margin: 5px;
+    border-width: 5px;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 2px;
+}
+.errorMessage{
+    color: red;
 }
