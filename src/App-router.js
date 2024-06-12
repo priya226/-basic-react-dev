@@ -5,9 +5,10 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestarauntMenu"
 import Home from './components/Home';
-import Login from "./components/Login";
+import SignUpForm from "./components/signUp";
 import Cart from "./components/Cart";
 import Profile from "./components/Profile";
+import LoginForm from "./components/LoginForm";
 
 const appRouter = createBrowserRouter([
     {
@@ -45,8 +46,12 @@ const appRouter = createBrowserRouter([
         ],
       },
       {
+        path: "/signUp",
+        element: <SignUpForm />
+      },
+      {
         path: "/login",
-        element: <Login />,
+        element: <LoginForm />
       },  
 ])
 

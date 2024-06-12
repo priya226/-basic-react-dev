@@ -23,6 +23,11 @@ export const Header =()=>{
                          <Link to='/cart'>Cart</Link> </li>
                     {/* conditional rendering of element */}
                     <li>
+                        <Link to='/signUp'>
+                        Signup
+                        </Link>
+                    </li>
+                    <li>
                         {
                            loginStatus==='login' ?(
                             <button
