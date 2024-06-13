@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
+//This is nested form creation using javascript objev=ct and form
 const SignUpForm = ()=>{
     const navigate = useNavigate();
      
@@ -112,7 +112,8 @@ const SignUpForm = ()=>{
 
     useEffect(()=>{
         setIsFormValid(checkValidation());
-    },[formSignUpData,formSignUpData.address,SignUpError]);
+    },[formSignUpData,formSignUpData.address,SignUpError]); // The dependency array does not detect nestee object change
+    //hence to detect change and call useeffect we have to give nested object reference into dependency array
 
     handleChange=(field,value)=>{ // this handle layer one of form
         setformSignUp({...formSignUpData,[field]:value})
@@ -167,12 +168,12 @@ const SignUpForm = ()=>{
             <form onSubmit={handleSubmit}>
             {
                 Object.keys(formField).map((field)=>{
-                   return  (
+                   return  ( ///The JSX was not getting render when it was not returned, map concept we have used { }
                    <div key={field}>
                         {
                              typeof formField[field]?.validation !== 'function' ?
                             (
-                                Object.keys(formField[field]).map((subfield)=>(
+                                Object.keys(formField[field]).map((subfield)=>( /// () braces does not req return
                                     <div key={`${formField}.${subfield}`}>
                                         <label>
                                             {formField[field][subfield]?.label}

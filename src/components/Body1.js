@@ -20,6 +20,26 @@ const Body1= () =>{
    const [filteredRestaurantListData,setFilterRestaurant]=useState([]) // filteredRestaurantList is used everywhere
 
     //wehener the state variable updates of rerender the element
+
+    const [count,setCount]=useState(0)
+    const incrementFIve =()=>{ 
+            setCount((previous)=>previous+5);
+            // setCount(count+5) // is not safe when we call this ,only 1 getting incremented hence use previous state
+            // big note: whenever gonna change value using the old value, need to use prevStateVar
+            // State Updates are Asynchronous: React may batch multiple state updates for performance reasons. When you call setCount(count + 1), React schedules this state update but doesn't update the state immediately.
+            // this need in primitive data type only  For Array and Objects, we can just use the references? (with spread operator maybe)
+            // If the state updates are batched or multiple setCount calls are made in quick succession, each setCount call will use the value of count from the time the component was last rendered, not the most recent state. This leads to incorrect updates because each call to increment uses the same stale value of count.
+            // setCount(count+1)
+            // setCount(count+1)
+            // First setCount(count + 1) uses count (say 0) and schedules the update to 1.
+            // Second setCount(count + 1) uses the same count (0) and schedules another update to 1.
+
+            // setCount(prevCount => prevCount + 1);
+            // setCount(prevCount => prevCount + 1);
+            // First setCount(prevCount => prevCount + 1) uses the latest state (0) and schedules the update to 1.
+            // Second setCount(prevCount => prevCount + 1) uses the updated state (1) and schedules the update to 2.
+
+    }
    useEffect(()=>{
     console.log('useEffect called');
    fetchData();
@@ -127,6 +147,13 @@ const Body1= () =>{
         }
         }>
         Reset
+        </button>
+        <button className="flt-btn" onClick={(prev)=>setCount(prev+1)}>
+        increment count 
+        </button>
+        
+        <button className="flt-btn" onClick={incrementFIve}>
+        increment count by 5
         </button>
       </div>
         

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import RestaurantCard from "./RestarauntCard";
 import Shimmer from  "./Shimmer";
+import { Link } from "react-router-dom";
 
     
 
@@ -82,6 +83,7 @@ function topRatedRestaraunt(rating,restarauntList){
      * what happens if we define variable or use usestate outside component variable
      * 
      * Declaring useState (or any other hook) outside the component body isn't allowed according to the React rules. Doing so would violate the rules of hooks, which dictate that hooks should only be called at the top level of the component body or within other custom hooks. Attempting to call hooks conditionally or within nested functions can lead to bugs or unexpected behavior in your components.
+     * Dont use Hooks outside functional component and in any other normal component
      * 
      *  */ 
 
@@ -154,7 +156,11 @@ function topRatedRestaraunt(rating,restarauntList){
 
             <div className='restaurant-list'>
             {filteredRestaurantListData?.map(restaraunt=>{
-                return <RestaurantCard key={restaraunt.info.id} {...restaraunt.info}/>
+                return <Link to={"/restaurant/"+restaraunt?.info?.id}
+                key={restaraunt?.info?.id}
+                >
+                <RestaurantCard key={restaraunt.info.id} {...restaraunt.info}/>
+                </Link>
             })
             }
             </div>

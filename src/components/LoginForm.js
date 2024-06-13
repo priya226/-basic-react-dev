@@ -9,7 +9,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate =useNavigate();
-
+  //dynamically creating form using react and form component and added custom validations
   const formFields = {
     email: {
       label: 'Email',
@@ -28,6 +28,7 @@ const LoginForm = () => {
     }
   };
 
+  // Useeffect is checking validation on submit form as error object geting change on event 
   useEffect(() => {
     const noErrors = Object.keys(errors).every(key => errors[key] === '');
     const allFieldsFilled = Object.keys(formData).every(key => formData[key] !== '');
@@ -35,7 +36,7 @@ const LoginForm = () => {
   }, [errors, formData]);
 
   const handleChange = (field, value) => {
-    setFormData(prevFormData => ({
+    setFormData(prevFormData => ({ //the existing data and new feild change
       ...prevFormData,
       [field]: value
     }));
