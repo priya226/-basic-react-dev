@@ -9,6 +9,7 @@ import SignUpForm from "./components/signUp";
 import Cart from "./components/Cart";
 import Profile from "./components/Profile";
 import LoginForm from "./components/LoginForm";
+import Practice from "./components/Practice";
 
 const appRouter = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const appRouter = createBrowserRouter([
         path: "/login",
         element: <LoginForm />
       },  
+      {
+        path: '/Practice',
+        element:<Practice />
+      }
 ])
 
 export default appRouter;
