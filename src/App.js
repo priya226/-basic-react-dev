@@ -2,10 +2,18 @@ import React from "react";
 import  ReactDOM  from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import appRouter from "./App-router";
+import AuthProvider from "../utils/Auth";
 
 const AppLayoutComponent = ()=>{
+  //  Wrap the RouterProvider component with the AuthProvider 
+  //  in your main entry point file, typically index.js or App.js.
+  // Now, all components rendered through the router
+  //  will have access to the AuthProvider context.
+
     return (
+    <AuthProvider>
       <RouterProvider router={appRouter} />
+    </AuthProvider>
     )
    }
 export default AppLayoutComponent;

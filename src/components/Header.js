@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { IMG_CDN_URL } from "../utils/constant";
 import { Link, useNavigate } from "react-router-dom";
+import { Auth } from "../../utils/Auth";
 
 export const Header =()=>{
    const [loginStatus,setUserLogin]=useState('login')
    const navigate = useNavigate(); // functionaly changing router define inside only other wise creates error
+   const auth =Auth();
     return (
         <div className='header'>
             <div className='logo-container'>
@@ -31,16 +33,17 @@ export const Header =()=>{
                     </li>
                     <li>
                         {
-                           loginStatus==='login' ?(
+                           auth.activeUserInfo ?(
                             <button
                                 className="logout-btn"
-                                onClick={() => setUserLogin('logout')}
+                                onClick={() => {auth.logout();
+                                                }}
                             >
                                 Logout
                             </button>
                            ) :(
-                            <button className="login-btn" onClick={() => {setUserLogin('login')
-                                                                          navigate("/login")}}>
+                            <button className="login-btn" onClick={() => {
+                               navigate("/login")}}>
                                 Login
                             </button>
                             )

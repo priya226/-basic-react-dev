@@ -10,6 +10,8 @@ import Cart from "./components/Cart";
 import Profile from "./components/Profile";
 import LoginForm from "./components/LoginForm";
 import Practice from "./components/Practice";
+import ValidateAuth from "../utils/validateAuth";
+import Popular from "./components/Popular";
 
 const appRouter = createBrowserRouter([
     {
@@ -28,7 +30,7 @@ const appRouter = createBrowserRouter([
             children:[
               {
                 path:'profile',
-                element:<Profile/>,
+                element: <ValidateAuth><Profile/> </ValidateAuth>
               }
             ]
           },
@@ -44,6 +46,10 @@ const appRouter = createBrowserRouter([
             path: "/restaurant/:resId",
             element: <RestaurantMenu />,
           },
+          {
+            path: "/restaurant/popular", // Here user/admin is matched bcs  router try to match router with dynamic routing
+            element: <Popular />,
+          }
         ],
       },
       {

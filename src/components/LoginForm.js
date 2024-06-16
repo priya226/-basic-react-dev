@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Auth } from '../../utils/Auth';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,9 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate =useNavigate();
+  const location =useLocation(); // If login coming from protective path condition this will have data
+
+  const auth = Auth(); //authentication set after login
   //dynamically creating form using react and form component and added custom validations
   const formFields = {
     email: {
@@ -50,7 +54,9 @@ const LoginForm = () => {
     e.preventDefault();
     if (isFormValid) {
       console.log('Form submitted', formData);
-      navigate('/')
+      auth.login(formData)
+      let redirectpath = location?.state?.path ? location.state.path :'/';
+      navigate(redirectpath,{replace:true})
     }
   };
 
