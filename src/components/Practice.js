@@ -1,9 +1,9 @@
-import React, { useReducer, useState,useCallback } from 'react'
+import React, { useReducer, useState,useCallback, useContext, useMemo } from 'react'
 // import NestedComponent from './NestedComponent';
 // import NewPractice from './NewPractice';
 import ToDo from './ToDo';
 import Counter from './Counter';
-import {Counterprovider} from './Counterprovider'
+import {Counterprovider, counterContext} from './Counterprovider'
 
 
 
@@ -188,42 +188,98 @@ import {Counterprovider} from './Counterprovider'
 // useful when passing functions as props to child components that might trigger unnecessary re-renders if the function reference changes on every render
 //callback will memoise the function increment decrement so that every time it does not get render child compoent
 
-function Practice() {
+// function Practice() {
     
-   const [todoList,setTodoList]=useState([]);
+//    const [todoList,setTodoList]=useState([]);
 
-   const [BasicCount,setBasicCount] =useState(0);
-   const [text,setText]=useState('')
+//    const [BasicCount,setBasicCount] =useState(0);
+//    const [text,setText]=useState('')
 
-   const addItem=useCallback((todoItem)=>{
-       setTodoList((previousTodo)=>[...previousTodo,todoItem]) //Avoid mutating state directly: React relies on immutability to detect stare changes. if i use .push  fn it will mutate original array
-       //If you mutate the state directly, React might not detect the change, and your component might not re-render as expected.
-   },[todoList])
+//    const addItem=useCallback((todoItem)=>{
+//        setTodoList((previousTodo)=>[...previousTodo,todoItem]) //Avoid mutating state directly: React relies on immutability to detect stare changes. if i use .push  fn it will mutate original array
+//        //If you mutate the state directly, React might not detect the change, and your component might not re-render as expected.
+//    },[todoList])
    
-   const deleteItem =useCallback((index)=>{
-    //    todoList.slice(index,1)
-       setTodoList(previousTodo => previousTodo.filter((item,i)=> i!=index));
-   },[todoList])
+//    const deleteItem =useCallback((index)=>{
+//     //    todoList.slice(index,1)
+//        setTodoList(previousTodo => previousTodo.filter((item,i)=> i!=index));
+//    },[todoList])
 
-   increment = () =>{
-    setBasicCount((previousStatus=> previousStatus+1))
-   },[BasicCount]
+//    increment = () =>{
+//     setBasicCount((previousStatus=> previousStatus+1))
+//    },[BasicCount]
 
-   console.log('parent component rendered')
-   return (
-    <div>
-        <div>
-            <label>Text is in paret compoent hence if settext call it rerenders the child components It should not rerender child as there is no data changed</label>
-            <input type='text' name='setText' value={text} onChange={(e)=>setText(e.target.value)} />
-            <button onClick={increment}>{BasicCount}+</button>
-        </div>
-        <ToDo  todoList ={todoList} HandleAddItem={addItem} HandleDeleteItem={deleteItem}/>
+//    console.log('parent component rendered')
+//    return (
+//     <div>
+//         <div>
+//             <label>Text is in paret compoent hence if settext call it rerenders the child components It should not rerender child as there is no data changed</label>
+//             <input type='text' name='setText' value={text} onChange={(e)=>setText(e.target.value)} />
+//             <button onClick={increment}>{BasicCount}+</button>
+//         </div>
+//         <ToDo  todoList ={todoList} HandleAddItem={addItem} HandleDeleteItem={deleteItem}/>
         
-    </div>
-   )
-}
+//     </div>
+//    )
+// }
 
 
 // we wiil wrap our callback fn usecontext and reducer in one example
 // coubtprovider.js creasted and we will use its context to load in other comp count.js And in counterprovider we will add reducer and callback
+// function Practice() {
+    // const { state,increment,decrement,reset}=useContext(counterContext) // we using contercontext usecontext will return all things which provided in value during wrapping nested component
+
+    // return <>
+    // <Counterprovider>
+    //     <p> Counter 1</p>
+    //     <Counter/>
+    // </Counterprovider>
+    // <br/>
+    // {/* getting error TypeError: Cannot destructure property 'state' of '(0 , _react.useContext)(...)' as it is undefined. for fetchinmg usecontext here  but why? */}
+    // {/* <Counterprovider>
+    // <p> Counter 2</p>
+    //     <div>
+    //         <h3> Count = {state.count}</h3>
+    //         <button onClick={()=>increment(2)}>Increment by 2</button>
+    //         <button onClick={()=>decrement(2)}>Decrement by 2</button>
+    //         <button onClick={reset}>Reset</button>
+    //     </div>
+    // </Counterprovider> */}
+    // </>
+
+
+function Practice() {
+    const [counterOne,setCounterOne] = useState(0);
+    const [counterTwo,setCounterTwo] = useState(0);
+
+    const incrementOne = ()=>{
+        setCounterOne(counterOne +1)
+    }
+
+    const incrementTwo =()=>{
+        setCounterTwo(counterTwo+1)
+    }
+
+    const isEven =useMemo(()=>{
+        let i =0;
+        while(i<100000) i++
+        return counterOne%2 === 0
+    },[counterOne])
+
+    return <>
+    <div>
+     <button onClick={incrementOne}> counter one - {counterOne} </button>
+     <span> {isEven ? 'even':'odd'}</span>
+    </div>
+    <div>
+        <p>The isEven function delays the incrementTwo as well inorder to avoid the 
+            performance issue we use callmemo which basically memoise the result 
+            of function and it only recalculates when dependency changes  </p>
+    <button onClick={incrementTwo}> counter Two - {counterTwo} </button>
+    </div>
+    </>
+}
+
+
+    
 export default Practice;
