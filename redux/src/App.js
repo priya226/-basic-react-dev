@@ -1,6 +1,7 @@
 const redux = require('redux');
 // import {redux} from 'redux';
 const createStore = redux.createStore  //get createStore functionality step 1
+const bindActionCreator = redux.bindActionCreators;
 
 //create function to return object with action type step 2
 const CAKE_ORDERED = 'CAKE_ORDERED'
@@ -49,10 +50,27 @@ console.log('initial state',store.getState());
 
 //get subscribe data , triggers whenever state change 
 const unsubscribe =store.subscribe(()=>{console.log('updated state ',store.getState())});
-store.dispatch(orderCake())
-store.dispatch(orderCake())
-store.dispatch(orderCake())
-store.dispatch(restockCake(3))
+
+// store.dispatch(orderCake())
+// store.dispatch(orderCake())
+// store.dispatch(orderCake())
+// store.dispatch(restockCake(3))
+
+/**
+ * But when you have multiple action creators, 
+ * you might need to call dispatch for each one individually.
+ *  bindActionCreators simplifies this by automatically 
+ * wrapping action creators with the dispatch function, 
+ * so you can call them directly.
+ * 
+ * Cleaner Code: Reduces boilerplate by automatically binding action creators to dispatch.
+ * not necessary
+ */
+const action = bindActionCreator({orderCake,restockCake},store.dispatch);
+action.orderCake(1);
+action.orderCake(2);
+action.restockCake(4);
+
 //need to unsubscribe the data after use 
 unsubscribe();
 // (prevstate,action)=>newstate
