@@ -1,3 +1,4 @@
+const { act } = require('react');
 const redux = require('redux');
 // import {redux} from 'redux';
 const createStore = redux.createStore  //get createStore functionality step 1
@@ -6,11 +7,14 @@ const bindActionCreator = redux.bindActionCreators;
 //create function to return object with action type step 2
 const CAKE_ORDERED = 'CAKE_ORDERED'
 const CAKE_RESTOCKED='CAKE_RESTOCKED'
+const ICECREAM_ORDERED ='ICECREAM_ORDERED'
+const ICECREAM_RESTOCKED='ICECREAM_RESTOCKED'
 
 
 //initialise object step 2
 const initialCakestate ={ //application state should be represented by single object
     numofcakes:10,
+    numOfIcecream:10
 }
 
 // functionality for ordercake
@@ -29,6 +33,20 @@ function restockCake(qt=1){
     }
 }
 
+function orderIcecream(qt=1){
+    return {
+        type:ICECREAM_ORDERED,
+        payload:qt
+    }
+}
+
+function restockIcecream(qt=1){
+    return {
+        type:ICECREAM_RESTOCKED,
+        payload:qt
+    }
+}
+
 // reducer function return state based on action type
 const cakeReducer =(state = initialCakestate,action)=>{
     switch(action.type){
@@ -36,6 +54,10 @@ const cakeReducer =(state = initialCakestate,action)=>{
             return { ...state, numofcakes : state.numofcakes-action.payload} //other properties should be same hence spread operator
         case CAKE_RESTOCKED:
             return {...state,numofcakes:state.numofcakes+action.payload}
+        case ICECREAM_ORDERED:
+             return {...state,numOfIcecream:state.numOfIcecream-action.payload}
+        case ICECREAM_RESTOCKED:
+             return {...state,numOfIcecream:state.numOfIcecream+action.payload}
         default:
              return state;
     }
@@ -66,10 +88,14 @@ const unsubscribe =store.subscribe(()=>{console.log('updated state ',store.getSt
  * Cleaner Code: Reduces boilerplate by automatically binding action creators to dispatch.
  * not necessary
  */
-const action = bindActionCreator({orderCake,restockCake},store.dispatch);
+const action = bindActionCreator({orderCake,restockCake,orderIcecream,restockIcecream},store.dispatch);
 action.orderCake(1);
 action.orderCake(2);
 action.restockCake(4);
+
+action.orderIcecream(2);
+action.orderIcecream(2);
+action.restockIcecream(2);
 
 //need to unsubscribe the data after use 
 unsubscribe();
