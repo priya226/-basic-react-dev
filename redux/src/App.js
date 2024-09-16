@@ -59,10 +59,6 @@ const cakeReducer =(state = initialCakestate,action)=>{
             return { ...state, numofcakes : state.numofcakes-action.payload} //other properties should be same hence spread operator
         case CAKE_RESTOCKED:
             return {...state,numofcakes:state.numofcakes+action.payload}
-        case ICECREAM_ORDERED:
-             return {...state,numOfIcecream:state.numOfIcecream-action.payload}
-        case ICECREAM_RESTOCKED:
-             return {...state,numOfIcecream:state.numOfIcecream+action.payload}
         default:
              return state;
     }
