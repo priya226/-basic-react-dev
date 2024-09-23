@@ -1,9 +1,14 @@
-const { act } = require('react');
 const redux = require('redux');
 // import {redux} from 'redux';
 const createStore = redux.createStore  //get createStore functionality step 1
 const bindActionCreator = redux.bindActionCreators; // to bind our actions function into reduce.dispatch
 const combineReducers =redux.combineReducers; // to combine our multiple reducers into single so that createstore we can pass only combined reducer
+
+const applyMiddleware = redux.applyMiddleware; //is a built-in function that allows you to extend Redux's behavior by adding custom middleware
+//applyMiddleware takes these functions as arguments and applies them to the Redux store.
+const reduxLogger=require('redux-logger'); // redux middleware used for logging every action dispatch
+//primary used for debugging purpose
+const logger = reduxLogger.createLogger();
 
 //create function to return object with action type step 2
 const CAKE_ORDERED = 'CAKE_ORDERED'
@@ -88,7 +93,8 @@ const rootReducer=combineReducers({
     icecream:iceCreamReducer
 })
 
-const store = createStore(rootReducer)
+// const store = createStore(rootReducer)
+const store = createStore(rootReducer,applyMiddleware(logger)) // logger from redux-loggerSS
 
 console.log('initial state',store.getState());
 
