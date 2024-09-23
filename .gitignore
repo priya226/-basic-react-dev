@@ -2,3 +2,5 @@
 /dist
 /.parcel-cache
 /redux/node_modules
+/redux/.parcel-cache
+/redux/dist
