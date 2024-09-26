@@ -5,6 +5,7 @@ const cakeReducer = require('../features/cake/cakeSlice')
 
 const icecreamReducer = require('../features/icecream/icecreamSlice')
 
+const userReducer=require('../features/users/userSlice')
 const reduxLogger = require('redux-logger'); //logger support for redux
 
 const logger = reduxLogger.createLogger();
@@ -29,7 +30,8 @@ const loggerMiddleware =(storeAPI)=>(next)=>(action)=>{
 const store = configureStore({
     reducer:{//insert multiple reducer here
         cake:cakeReducer,
-        icecream:icecreamReducer
+        icecream:icecreamReducer,
+        user:userReducer,
     },
     /**
      * getDefaultMiddleware() ensures that all the default middleware (like redux-thunk, immutability, and serializability checks) are included.
