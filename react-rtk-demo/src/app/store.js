@@ -1,5 +1,5 @@
 //configuring store = creating store here
-import configureStore from'@reduxjs/toolkit'
+import {configureStore} from'@reduxjs/toolkit'
 
 import cakeReducer from '../features/cake/cakeSlice';  
 

@@ -1,4 +1,4 @@
-import createSlice from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 /**
  * A "slice" in Redux Toolkit represents a
