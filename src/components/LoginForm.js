@@ -34,7 +34,10 @@ const LoginForm = () => {
 
   // Useeffect is checking validation on submit form as error object geting change on event 
   useEffect(() => {
+    //true if no error false if error
     const noErrors = Object.keys(errors).every(key => errors[key] === '');
+    
+    //true if all have value, false if some data not filled
     const allFieldsFilled = Object.keys(formData).every(key => formData[key] !== '');
     setIsFormValid(noErrors && allFieldsFilled);
   }, [errors, formData]);
